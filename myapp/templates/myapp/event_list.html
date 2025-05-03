@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Events in {{ request.GET.month }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
+            padding: 2rem;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background: #e0f7fa;
+            margin: 0.5rem auto;
+            padding: 1rem;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Events in {{ request.GET.month }}</h1>
+
+    {% if events %}
+        <ul>
+            {% for event in events %}
+                <li>{{ event }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No events found for this month. Try a different one! ❌</p>
+    {% endif %}
+</body>
+</html>
