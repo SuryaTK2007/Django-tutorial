@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <h2>Select a Month to View Events 📅</h2>
+<form action="{% url 'event_list' %}" method="get">
+    <select name="month">
+        {% for m in months %}
+            <option value="{{ m }}">{{ m }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Show Events</button>
+</form>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
+            padding: 2rem;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+        }
+        select, button {
+            padding: 0.5rem;
+            margin-top: 1rem;
+        }
+    </style>
+</html>

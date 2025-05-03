@@ -4,6 +4,14 @@ from django.http import HttpResponse
 def home(request):
     return HttpResponse("Hello, world! This is the home page.")
 
+def month_selection(request):
+    month = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+    ]
+    
+    return render(request, 'myapp/month_selection.html', {'months': month})
+
 def event(request):
     month = [
         'January', 'February', 'March', 'April', 'May', 'June',
