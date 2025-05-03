@@ -35,10 +35,8 @@ def event(request):
     month_name = month[month_number - 1]
     return HttpResponse(f"The month is {month_name} 🎉")
 
-# Create your views here.
-
 def event_list(request):
-    title = request.GET.get('month')  # This will now be based on 'title', not 'month'
+    title = request.GET.get('month')  
     if title:
         event_doc = Event.objects.filter(title=title).first()
         if event_doc:
