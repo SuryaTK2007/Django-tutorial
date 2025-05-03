@@ -11,6 +11,15 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from mongoengine import connect
+
+
+connect(
+    db='event_db',         # You can name this whatever you like
+    host='localhost',
+    port=27017
+)
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

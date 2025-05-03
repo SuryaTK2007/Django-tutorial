@@ -1,3 +1,5 @@
-from django.db import models
+from mongoengine import Document, StringField, ListField
 
-# Create your models here.
+class Event(Document):
+    title = StringField(required=True)
+    event = ListField(StringField())

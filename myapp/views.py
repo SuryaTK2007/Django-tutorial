@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Event
 
 def home(request):
     return HttpResponse("Hello, world! This is the home page.")
@@ -35,24 +36,13 @@ def event(request):
     return HttpResponse(f"The month is {month_name} 🎉")
 
 # Create your views here.
+
 def event_list(request):
-    events={
-        'January': ['New Year Party', 'Winter Festival'],
-        'February': ['Valentine\'s Day', 'Winter Carnival'],
-        'March': ['Spring Festival', 'St. Patrick\'s Day'],
-        'April': ['Easter', 'Spring Break'],
-        'May': ['Labor Day', 'Spring Festival'],
-        'June': ['Summer Solstice', 'Graduation'],
-        'July': ['Independence Day', 'Summer Festival'],
-        'August': ['Summer Vacation', 'Back to School'],
-        'September': ['Fall Festival', 'Labor Day'],
-        'October': ['Halloween', 'Fall Break'],
-        'November': ['Thanksgiving', 'Fall Festival'],
-        'December': ['Christmas', 'New Year\'s Eve']
-    }
-    month = request.GET.get('month')
-    if month:
-        events_list = events.get(month, [])
-        return render(request, 'myapp/event_list.html', {'events': events_list})
-    else:
-        return HttpResponse("Please provide a month in the query string (e.g., ?month=January) 📅")
+    title = request.GET.get('month')  # This will now be based on 'title', not 'month'
+    if title:
+        event_doc = Event.objects.filter(title=title).first()
+        if event_doc:
+            return render(request, 'myapp/event_list.html', {'events': event_doc.event})
+        else:
+            return HttpResponse(f"No events found for {title} 😶")
+    return HttpResponse("Please provide a month (title) in the query string (e.g., ?month=January) 📅")
